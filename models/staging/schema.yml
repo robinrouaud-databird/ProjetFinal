@@ -1,0 +1,243 @@
+
+version: 2
+
+models:
+    - name: stg_localbike_brands
+      description: "List of the bike brands in LocalBike"
+      columns:
+          - name: brand_id
+            description: "Unique ID of the brand"
+            tests:
+                - unique
+                - not_null
+          - name: brand_name
+            description: "Name of the brand"
+            tests:
+                - not_null
+
+    - name: stg_localbike_categories
+      description: "Categories of the bikes"
+      columns:
+          - name: category_id
+            description: "Unique ID of the category"
+            tests:
+                - unique
+                - not_null
+          - name: category_name
+            description: "Name of the category"
+            tests:
+                - not_null
+
+    - name: stg_localbike_customers
+      description: "Customers of LocalBike"
+      columns:
+          - name: customer_id
+            description: "Unique ID of the customer"
+            tests:
+                - unique
+                - not_null
+          - name: first_name
+            description: "First Name"
+            tests:
+                - not_null
+          - name: last_name
+            description: "Last Name"
+            tests:
+                - not_null
+          - name: phone
+            description: "US Phone"
+          - name: email
+            description: "Email Adress"
+          - name: street
+            description: "Street name"
+          - name: city
+            description: "City or Locality"
+          - name: state
+            description: "State name"
+          - name: zip_code
+            description: "US ZIP Code"
+
+    - name: stg_localbike_order_items
+      description: "Quantity, price and discount of the products ordered for each order"
+      columns:
+          - name: order_id
+            description: "Order ID"
+            tests:
+                - not_null
+                - relationships:
+                    name: "foreign_key_order_id_in_order_items"
+                    to: ref('stg_localbike_orders')
+                    field: order_id
+          - name: item_id
+            description: "Item ID"
+            tests:
+                - not_null
+          - name: product_id
+            description: "Product ID"
+            tests:
+                - not_null
+                - relationships:
+                    name: "foreign_key_product_id_in_order_items"
+                    to: ref('stg_localbike_products')
+                    field: product_id
+          - name: quantity
+            description: "Quantity"
+          - name: list_price
+            description: "Price of the product"
+          - name: discount
+            description: "% discount on the total amount for the product line"
+
+    - name: stg_localbike_orders
+      description: "Quantity, price and discount of the products ordered for each order"
+      columns:
+          - name: order_id
+            description: "Order ID"
+            tests:
+                - unique
+                - not_null
+          - name: customer_id
+            description: "Customer ID"
+            tests:
+                - not_null
+                - relationships:
+                    name: "foreign_key_customer_id_in_orders"
+                    to: ref('stg_localbike_customers')
+                    field: customer_id
+          - name: order_status
+            description: "Status of the Order"
+            tests:
+                - not_null
+          - name: order_date
+            description: "Order Date"
+          - name: required_date
+            description: "Required Date"
+          - name: shipped_date
+            description: "Shipped Date"
+          - name: store_id
+            description: "Store ID"
+            tests:
+                - not_null
+                - relationships:
+                    name: "foreign_key_store_id_in_orders"
+                    to: ref('stg_localbike_stores')
+                    field: store_id
+          - name: staff_id
+            description: "ID of the staff employee who completed the order"
+            tests:
+                - not_null
+                - relationships:
+                    name: "foreign_key_staff_id_in_orders"
+                    to: ref('stg_localbike_staffs')
+                    field: staff_id
+
+    - name: stg_localbike_products
+      description: "List of the products proposed by LocalBike"
+      columns:
+          - name: product_id
+            description: "Unique ID of the product"
+            tests:
+                - unique
+                - not_null
+          - name: product_name
+            description: "Name of the product"
+            tests:
+                - not_null
+          - name: brand_id
+            description: "ID brand of the product"
+            tests:
+                - not_null
+                - relationships:
+                    name: "foreign_key_brand_id_in_products"
+                    to: ref('stg_localbike_brands')
+                    field: brand_id
+          - name: category_id
+            description: "ID category of the product"
+            tests:
+                - not_null
+                - relationships:
+                    name: "foreign_key_category_id_in_products"
+                    to: ref('stg_localbike_categories')
+                    field: category_id
+          - name: model_year
+            description: "Model Year"
+          - name: list_price
+            description: "Price of the product"
+
+    - name: stg_localbike_staffs
+      description: "Staff Employees and their informations"
+      columns:
+          - name: staff_id
+            description: "Staff ID"
+            tests:
+                - unique
+                - not_null
+          - name: first_name
+            description: "First Name"
+            tests:
+                - not_null
+          - name: last_name
+            description: "Last Name"
+            tests:
+                - not_null
+          - name: email
+            description: "Email Adress"
+          - name: phone
+            description: "US Phone"
+          - name: active
+            description: "Employee active or not"
+            tests:
+                - not_null
+          - name: store_id
+            description: "Store ID where the employee works"
+            tests:
+                - not_null
+                - relationships:
+                    name: "foreign_key_store_id_in_staffs"
+                    to: ref('stg_localbike_stores')
+                    field: store_id
+          - name: manager_id
+            description: "ID of the manager of the staff employee"
+
+    - name: stg_localbike_stocks
+      description: "Description of the stocks"
+      columns:
+          - name: store_id
+            description: "ID of the store"
+            tests:
+                - not_null
+          - name: product_id
+            description: "ID Product"
+            tests:
+                - not_null
+                - relationships:
+                   arguments:
+                    name: "foreign_key_product_id_in_stocks"
+                    to: ref('stg_localbike_products')
+                    field: product_id
+          - name: quantity
+            description: "Quantity of the product in the store"
+
+    - name: stg_localbike_stores
+      description: "Stores and informations about them"
+      columns:
+          - name: store_id
+            description: "Unique ID of the customer"
+            tests:
+                - unique
+                - not_null
+          - name: store_name
+            description: "Store Name"
+            tests:
+                - not_null
+          - name: phone
+            description: "US Phone"
+          - name: email
+            description: "Email Adress"
+          - name: street
+            description: "Street name"
+          - name: city
+            description: "City or Locality"
+          - name: state
+            description: "State name"
+          - name: zip_code
+            description: "US ZIP Code"
