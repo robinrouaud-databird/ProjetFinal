@@ -1,0 +1,23 @@
+
+version: 2
+
+models:
+    - name: int_localbike_products
+      description: "KPIs and insights on products"
+      columns:
+          - name: product_id
+            description: "Unique ID of the product"
+            tests:
+                - unique
+                - not_null
+          - name: model_year
+            description: "Model Year of the product"
+          - name: total_revenue_product
+            description: "Revenue of the product"
+          - name: total_discount_product
+            description: "Total of the discounts of the product in the orders"
+          - name: total_revenue_entreprise
+            description: "Total of the revenue of the company"
+          - name: volume_sales
+            description: "Total volume of products sold by the company"
+    

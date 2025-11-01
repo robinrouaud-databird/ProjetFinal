@@ -65,6 +65,7 @@ models:
             tests:
                 - not_null
                 - relationships:
+                   arguments:
                     name: "foreign_key_order_id_in_order_items"
                     to: ref('stg_localbike_orders')
                     field: order_id
@@ -77,6 +78,7 @@ models:
             tests:
                 - not_null
                 - relationships:
+                   arguments:
                     name: "foreign_key_product_id_in_order_items"
                     to: ref('stg_localbike_products')
                     field: product_id
@@ -100,6 +102,7 @@ models:
             tests:
                 - not_null
                 - relationships:
+                   arguments:
                     name: "foreign_key_customer_id_in_orders"
                     to: ref('stg_localbike_customers')
                     field: customer_id
@@ -118,6 +121,7 @@ models:
             tests:
                 - not_null
                 - relationships:
+                   arguments:
                     name: "foreign_key_store_id_in_orders"
                     to: ref('stg_localbike_stores')
                     field: store_id
@@ -126,6 +130,7 @@ models:
             tests:
                 - not_null
                 - relationships:
+                   arguments:
                     name: "foreign_key_staff_id_in_orders"
                     to: ref('stg_localbike_staffs')
                     field: staff_id
@@ -147,6 +152,7 @@ models:
             tests:
                 - not_null
                 - relationships:
+                   arguments:
                     name: "foreign_key_brand_id_in_products"
                     to: ref('stg_localbike_brands')
                     field: brand_id
@@ -155,6 +161,7 @@ models:
             tests:
                 - not_null
                 - relationships:
+                   arguments:
                     name: "foreign_key_category_id_in_products"
                     to: ref('stg_localbike_categories')
                     field: category_id
@@ -192,6 +199,7 @@ models:
             tests:
                 - not_null
                 - relationships:
+                   arguments:
                     name: "foreign_key_store_id_in_staffs"
                     to: ref('stg_localbike_stores')
                     field: store_id
