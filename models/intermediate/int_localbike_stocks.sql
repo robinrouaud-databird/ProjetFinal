@@ -16,7 +16,7 @@ select AVG(stock_product) AS average_stock from total_stock_product
 )
 
 select 
-    products.product_id, 
+    stocks.product_id, 
     products.total_revenue_product, 
     stock_product, 
     average_stock
@@ -24,4 +24,4 @@ from {{ ref('stg_localbike_stocks') }} stocks, avg_stock_products
 left join {{ ref('int_localbike_products') }} products
   ON stocks.product_id = products.product_id
 left join total_stock_product tp on tp.product_id = products.product_id
-group by products.product_id, products.total_revenue_product, stock_product, average_stock
+group by stocks.product_id, products.total_revenue_product, stock_product, average_stock
