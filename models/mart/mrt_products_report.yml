@@ -1,0 +1,6 @@
+version: 2
+
+models:
+  - name: mrt_products_report
+    description: '{{ doc("mrt_products_report") }}'
+  
