@@ -5,5 +5,5 @@ select
     CAST(quantity AS INTEGER) AS quantity,
     CAST(list_price AS NUMERIC) AS list_price,
     CAST(discount AS NUMERIC) AS discount,
-    quantity * list_price * (1 - discount) AS order_item_amount
+    CAST(quantity * list_price * (1 - discount) AS NUMERIC) AS order_item_amount
 from {{ source('LocalBike', 'order_items') }}
