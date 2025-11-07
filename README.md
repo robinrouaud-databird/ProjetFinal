@@ -1,15 +1,5 @@
-Welcome to your new dbt project!
+VOici mon projet final DBT réalisé pour LocalBike
 
-### Using the starter project
-
-Try running the following commands:
-- dbt run
-- dbt test
-
-
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [dbt community](https://getdbt.com/community) to learn from other analytics engineers
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+Je vous mets en PJ les URL Metabase des dashboards que j'ai créés :
+- https://pacific-compass.metabaseapp.com/public/dashboard/62c724e3-4f5a-4ccb-9e1c-3fbb25312ab8
+- https://pacific-compass.metabaseapp.com/public/dashboard/f521425c-5665-49c1-9223-27871168d81a
