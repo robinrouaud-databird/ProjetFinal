@@ -1,5 +1,5 @@
 --
--- Cohorte : time spent after first order by customer 
+-- first_order : extraction de la 1ère date de commande par client
 --
 WITH first_order AS (
   SELECT
@@ -8,6 +8,10 @@ WITH first_order AS (
   FROM {{ ref('int_localbike_orders') }}
   GROUP BY customer_id
 )
+--
+-- jointure pour extraire associer chaque commande et son client
+-- à la cohorte associée (Année/mois de la 1ère commande)
+-- 
 , orders_with_cohort AS (
   SELECT
     o.order_id,
@@ -20,20 +24,23 @@ WITH first_order AS (
   FROM {{ ref('int_localbike_orders') }} o
   JOIN first_order f ON o.customer_id = f.customer_id
 )
+--
+-- groupement par cohorte et calcul du délai entre 1ère commande et la prochaine
+--
 , cohort_analysis AS (
   SELECT
     cohort_year,
     cohort_month,
     DATE_DIFF(o.order_created_at, o.first_order_date, MONTH) AS month_offset,
-    o.total_amount_order,
+    SUM(o.total_amount_order) AS revenue,
     COUNT(DISTINCT o.customer_id) AS active_customers
   FROM orders_with_cohort o
-  GROUP BY cohort_year, cohort_month, month_offset, total_amount_order
+  GROUP BY cohort_year, cohort_month, month_offset
 )
 SELECT 
     cohort_year,
     cohort_month,
     month_offset,
-    total_amount_order,
+    revenue,
     active_customers
 FROM cohort_analysis
