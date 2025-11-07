@@ -1,6 +1,24 @@
 
 version: 2
 models:
+    - name: int_localbike_orders_with_cohort
+      description: '{{ doc("int_localbike_orders_with_cohort") }}'
+      columns:
+          - name: cohort_year
+            description: "Year of the cohort"
+            tests:
+                - not_null
+          - name: cohort_month
+            description: "Month of the cohort"
+            tests:
+                - not_null
+          - name: month_offset
+            description: "Offset compared to first order"
+          - name: revenue
+            description: "Total of orders by cohort"
+          - name: active_customers
+            description: "Number of customers with an order on the cohort"
+
     - name: int_localbike_stores
       description: '{{ doc("int_localbike_stores") }}'
       columns:
