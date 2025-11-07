@@ -41,13 +41,18 @@ models:
     staging:
       +materialized: view
       +schema: stg
-
+      +meta:
+        modeling_layer: staging
     # Configuration spécifique pour le dossier 'intermediate'
     intermediate:
       +materialized: view
       +schema: int
+      +meta:
+        modeling_layer: intermediate
 
     # Configuration spécifique pour le dossier 'intermediate'
     mart:
       +materialized: table
       +schema: mrt
+      +meta:
+        modeling_layer: mart
