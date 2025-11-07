@@ -1,5 +1,5 @@
 --Revenue by store and volume of products sold
---
+
 with revenue_by_store as (
 SELECT 
     stores.store_id,
